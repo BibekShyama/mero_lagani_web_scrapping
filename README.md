@@ -1,5 +1,4 @@
 # mero_lagani_web_scrapping
 
-Scrapes the current stocks from mero lagani website
-
+A scraper to scrape daily floorsheet data from Mero Lagani into a CSV file in /data folder.
 Techstack used: python, selenium, beautifulsoup,pandas
