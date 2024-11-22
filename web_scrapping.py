@@ -86,7 +86,6 @@ def clean_df(df):
     return new_df
 
 
-
 # Configure Edge options
 options = Options()
 options.headless = True  # Run in headless mode (no browser GUI)
@@ -99,13 +98,19 @@ options.add_argument("--disable-dev-shm-usage")
 driver = webdriver.Edge(service=Service(EdgeChromiumDriverManager().install()), options=options)
 
 # Format today's date
+current_day=datetime.now().strftime("%A").lower()
 date = datetime.today().strftime('%m/%d/%Y')
-print(f"date: {date}")
 
-# Perform the search
-search(driver, date)
-df=scrape_data(driver,date)
-driver.quit()
+stock_closed_day_list=['friday','saturday','sunday']
+
+if current_day not in stock_closed_day_list:
+    # Perform the search
+    search(driver, date)
+    df=scrape_data(driver,date)
+    driver.quit()
+else:
+    print(f"Stock market is closed today ({current_day}). Execution terminated.")
+    exit()
 
 
 
